@@ -17,7 +17,7 @@ public:
 	int getCommand(int courseToSteer, int heading);
 
 	// sets the values returned by getCommand()
-	void setCommandValues(int extreme, int medium, int small, int midships);
+	void setCommandValues(int starboardExtreme, int starboardMedium, int starboardSmall, int midships);
 
 	// sets the angles used by getCommand() to return appropriate command,
 	// extreme angle uses whats left over
