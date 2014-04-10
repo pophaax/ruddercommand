@@ -18,30 +18,19 @@ public:
 
   /* Returns a value between 97-103 for the rudder. Takes a CTS value as 
      parameter. */
-  double getRudderValue(double cts, double speed, double heading, double hdt_heading);
-  int setSpeedConstant(int speedCheck);
+  double getRudderValue(double cts, double heading);
   int getOffCourse();
   int getSteeringCnst();
   
   
 private:
   
-  /* This function uses the speedCheck value tho decide which sensor heading 
-     to use. If it's higher then the speedCheck value the GPS is used. */
-  int decideSOG(double speed, double heading, double hdt_heading);
-
   /* Calculates the steeringconstant based on CTS and heading */
-  int getSteeringConstant(int cts, double speed, double heading, double hdt_heading);
+  int getSteeringConstant(int cts, double heading);
 
   /* Calculates the turningconstant based on an older course and a newer course.
   */
-  int getTurningConstant(double heading, double hdt_heading);
-
-  /* Get a new course, the course comes from the same sensor used in decideSOG.
-  */
-  int getNewCourse(double heading, double hdt_heading);
-  
-  //Sheduler m_sheduler;
+  int getTurningConstant(double heading);
 
   int steeringConstant;
   int offCourse;

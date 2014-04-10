@@ -8,21 +8,6 @@ AutoPilot::AutoPilot() {
 
 AutoPilot::~AutoPilot() { }
 
-int AutoPilot::decideSOG(double speed, double heading, double hdt_heading) {
-  
-  int tmpCourse;
-  
-  if (speed > m_speedCheck) {
-      tmpCourse = heading;
-      m_highSpeed = true;
-
-  } else {
-      tmpCourse = hdt_heading;
-      m_highSpeed = false;
-  }
-
-  return tmpCourse;
-}
 
 int up(int cts, int heading) {
 	bool flag = true;
@@ -68,12 +53,12 @@ int AutoPilot::getSteeringCnst() {
 	return steeringConstant;
 }
 
-int AutoPilot::getSteeringConstant(int cts, double speed, double heading, double hdt_heading) {
+int AutoPilot::getSteeringConstant(int cts, double heading) {
   
   int tmpSteeringConstant = 0;
   offCourse = 0;
  
-  m_course = decideSOG(speed, heading, hdt_heading);
+  m_course = heading;
 
   int diffUp = up(cts, m_course);
   int diffDown = down(cts, m_course);
@@ -115,14 +100,12 @@ int AutoPilot::getSteeringConstant(int cts, double speed, double heading, double
   return tmpSteeringConstant;
   
 }
-int AutoPilot::getTurningConstant(double heading, double hdt_heading) {
+int AutoPilot::getTurningConstant(double heading) {
   
   int tmpTurnConst = 0;
   int tps = 0;
-  
-  m_newCourse = getNewCourse(heading, hdt_heading);
-  
-  m_turnRate = m_course - m_newCourse;
+    
+  m_turnRate = m_course - heading;
   
   if (m_turnRate <= tps) {
     tmpTurnConst = -1;
@@ -136,15 +119,15 @@ int AutoPilot::getTurningConstant(double heading, double hdt_heading) {
   
 }
 
-double AutoPilot::getRudderValue(double cts, double speed, double heading, double hdt_heading) {
+double AutoPilot::getRudderValue(double cts, double heading) {
   
   double tmpSteeringConstant = 0;
   double tmpTurnConst;
   double tmpRudderValue;
   
-  tmpSteeringConstant = getSteeringConstant(cts, speed, heading, hdt_heading);
+  tmpSteeringConstant = getSteeringConstant(cts, heading);
   steeringConstant = tmpSteeringConstant;
-  tmpTurnConst = getTurningConstant(heading, hdt_heading);
+  tmpTurnConst = getTurningConstant(heading);
   
   tmpRudderValue = tmpSteeringConstant + tmpTurnConst + 100;
   
@@ -157,30 +140,3 @@ double AutoPilot::getRudderValue(double cts, double speed, double heading, doubl
   return tmpRudderValue;
   
 }
-
-int AutoPilot::getNewCourse(double heading, double hdt_heading) {
-  
-  int tmpCourse;
-  
-  if (m_highSpeed == true) {
-    tmpCourse = heading;
-  } else {
-    tmpCourse = hdt_heading;
-  }
-  
-  return tmpCourse;
-}
-
-int AutoPilot::setSpeedConstant(int speedCheck) {
-
-  this->m_speedCheck = speedCheck;
-
-}
-
-
-
-
-
-
-
-
