@@ -3,109 +3,54 @@
 #include <iostream>
 
 AutoPilot::AutoPilot() {
-  
+  m_steeringValue = 0;
 }
 
 AutoPilot::~AutoPilot() { }
 
 
-int up(int cts, int heading) {
-	bool flag = true;
-	int i = 0;
-	for (i=0; i<360 && flag == true; i++) {
-		if (heading == cts) {
-			flag = false;
-		}
-		
-		heading++;
-
-		if (heading == 360) {
-			heading = 0;
-		}
-	}
-
-	return i;
-}
-
-int down(int cts, int heading) {
-	bool flag = true;
-	int i = 0;
-	for (i=0; i<360 && flag == true; i++) {
-		if (heading == cts) {
-			flag = false;
-		}
-		
-		heading--;
-		
-		if (heading == -1) {
-			heading = 359;
-		}
-	}
-	
-	return i;
-}
-
 int AutoPilot::getOffCourse() {
-	return offCourse;
+	return m_offCourse;
 }
 
 int AutoPilot::getSteeringCnst() {
-	return steeringConstant;
+	return m_steeringValue;
 }
 
-int AutoPilot::getSteeringConstant(int cts, double heading) {
-  
-  int tmpSteeringConstant = 0;
-  offCourse = 0;
- 
-  m_course = heading;
+void AutoPilot::calcSteeringConstant(int cts) {
 
-  int diffUp = up(cts, m_course);
-  int diffDown = down(cts, m_course);
-
-	if (diffUp <= diffDown) {
-		offCourse = diffUp;
-	}
-	else {
-		offCourse = -diffDown;
-	}
-  
-  if (offCourse >= -12 && offCourse <= -17) {
-      
-      tmpSteeringConstant = -2;
-      
-  } else if (offCourse >= -6 && offCourse <= -11) {
-      
-      tmpSteeringConstant = -1;
-      
-  } else if (offCourse >= -5 && offCourse <= 5) {
-      
-      tmpSteeringConstant = 0;
-      
-  } else if (offCourse >= 6 && offCourse <= 11) {
-      
-      tmpSteeringConstant = 1;
-      
-  } else if (offCourse >= 12 && offCourse <= 17) {
-      
-      tmpSteeringConstant = 2;
-      
-  } else if (offCourse < -17) {
-    
-    tmpSteeringConstant = -3;
-    
-  } else if (offCourse > 17) {
-    tmpSteeringConstant = 3;
+  m_offCourse = cts - m_course;
+  if (m_offCourse > 180) {
+    m_offCourse = -360 + m_offCourse;
   }
-  return tmpSteeringConstant;
+  if (m_offCourse < -180) {
+    m_offCourse = 360 + m_offCourse;
+  }
+  std::cout << "adjusted offc: " << m_offCourse << "\n";
   
+  if (m_offCourse < -17) {
+    m_steeringValue = -3;
+  } else if (m_offCourse < -11) {
+    m_steeringValue = -2;
+  } else if (m_offCourse < -5) {
+    m_steeringValue = -1;
+  } else if (m_offCourse < 6) {
+    m_steeringValue = 0;
+  } else if (m_offCourse < 12) {
+    m_steeringValue = 1;
+  } else if (m_offCourse < 17) {
+    m_steeringValue = 2;
+  } else {
+    m_steeringValue = 3;
+  }
 }
-int AutoPilot::getTurningConstant(double heading) {
+
+int AutoPilot::calcTurningConstant() {
   
   int tmpTurnConst = 0;
   int tps = 0;
     
-  m_turnRate = m_course - heading;
+  m_turnRate = m_course - m_course;  //needs fix
   
   if (m_turnRate <= tps) {
     tmpTurnConst = -1;
@@ -121,15 +66,14 @@ int AutoPilot::getTurningConstant(double heading) {
 
 double AutoPilot::getRudderValue(double cts, double heading) {
   
-  double tmpSteeringConstant = 0;
+  m_course = heading;
   double tmpTurnConst;
   double tmpRudderValue;
   
-  tmpSteeringConstant = getSteeringConstant(cts, heading);
-  steeringConstant = tmpSteeringConstant;
-  tmpTurnConst = getTurningConstant(heading);
+  calcSteeringConstant(cts);
+  tmpTurnConst = calcTurningConstant();
   
-  tmpRudderValue = tmpSteeringConstant + tmpTurnConst + 100;
+  tmpRudderValue = m_steeringValue + tmpTurnConst + 100;
   
   if (tmpRudderValue < 97) {
     tmpRudderValue = 97;

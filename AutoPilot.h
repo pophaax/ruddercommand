@@ -1,6 +1,4 @@
 #include <iostream>
-#include <vector>
-
 
 
 class AutoPilot {
@@ -26,18 +24,14 @@ public:
 private:
   
   /* Calculates the steeringconstant based on CTS and heading */
-  int getSteeringConstant(int cts, double heading);
+  void calcSteeringConstant(int cts);
 
   /* Calculates the turningconstant based on an older course and a newer course.
   */
-  int getTurningConstant(double heading);
+  int calcTurningConstant();
 
-  int steeringConstant;
-  int offCourse;
+  int m_steeringValue;
+  int m_offCourse;
   int m_course;
-  int m_newCourse;
   int m_turnRate;
-  int m_speedCheck;
-  bool m_highSpeed;
-  
 };
