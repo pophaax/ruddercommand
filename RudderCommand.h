@@ -1,4 +1,5 @@
-#include <iostream>
+#ifndef __RUDDERCOMMAND_H__
+#define __RUDDERCOMMAND_H__
 
 class RudderCommand {
 
@@ -32,3 +33,5 @@ private:
 	int m_course;
 	// int m_turnRate;
 };
+
+#endif
