@@ -1,37 +1,34 @@
 #include <iostream>
 
-
 class AutoPilot {
- 
-/* Autopilot handles the calculations for the rudder, the calculations is based
-   from a CTS value and returns a value between 97-103 to be used with the servo 
-   module. */   
-  
+
+	/* Autopilot handles the calculations for the rudder, the calculations is based
+	 from a CTS value and returns a value between 97-103 to be used with the servo 
+	 module. */
+
 public:
-  
-  /* The construtor, the parameter is a value that represent the boatspeed 
-     and which sensor the Autopilot use is based on this. */ 
-  AutoPilot(); 
-  ~AutoPilot(); //destructor
 
-  /* Returns a value between 97-103 for the rudder. Takes a CTS value as 
-     parameter. */
-  double getRudderValue(double cts, double heading);
-  int getOffCourse();
-  int getSteeringCnst();
-  
-  
+	/* The construtor, the parameter is a value that represent the boatspeed 
+	 and which sensor the Autopilot use is based on this. */
+	AutoPilot();
+	~AutoPilot(); //destructor
+
+	/* Returns a value between 97-103 for the rudder. Takes a CTS value as 
+	 parameter. */
+	int getRudderValue(int cts, int heading);
+	int getOffCourse();
+	int getSteeringCnst();
+
 private:
-  
-  /* Calculates the steeringconstant based on CTS and heading */
-  void calcSteeringConstant(int cts);
 
-  /* Calculates the turningconstant based on an older course and a newer course.
-  */
-  int calcTurningConstant();
+	/* Calculates the steeringconstant based on CTS and heading */
+	void calcSteeringConstant(int cts);
 
-  int m_steeringValue;
-  int m_offCourse;
-  int m_course;
-  int m_turnRate;
+	/* Calculates the turningconstant based on an older course and a newer course.
+	 */
+	// int calcTurningConstant();
+	int m_steeringValue;
+	int m_offCourse;
+	int m_course;
+	// int m_turnRate;
 };
