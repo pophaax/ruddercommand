@@ -1,17 +1,17 @@
 #include <iostream>
 
-class AutoPilot {
+class RudderCommand {
 
-	/* Autopilot handles the calculations for the rudder, the calculations is based
+	/* RudderCommand handles the calculations for the rudder, the calculations is based
 	 from a CTS value and returns a value between 97-103 to be used with the servo 
 	 module. */
 
 public:
 
 	/* The construtor, the parameter is a value that represent the boatspeed 
-	 and which sensor the Autopilot use is based on this. */
-	AutoPilot();
-	~AutoPilot(); //destructor
+	 and which sensor the RudderCommand use is based on this. */
+	RudderCommand();
+	~RudderCommand(); //destructor
 
 	/* Returns a value between 97-103 for the rudder. Takes a CTS value as 
 	 parameter. */

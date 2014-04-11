@@ -1,21 +1,21 @@
-#include "AutoPilot.h"
+#include "RudderCommand.h"
 
-AutoPilot::AutoPilot() {
+RudderCommand::RudderCommand() {
 	m_steeringValue = 0;
 }
 
-AutoPilot::~AutoPilot() {
+RudderCommand::~RudderCommand() {
 }
 
-int AutoPilot::getOffCourse() {
+int RudderCommand::getOffCourse() {
 	return m_offCourse;
 }
 
-int AutoPilot::getSteeringCnst() {
+int RudderCommand::getSteeringCnst() {
 	return m_steeringValue;
 }
 
-void AutoPilot::calcSteeringConstant(int cts) {
+void RudderCommand::calcSteeringConstant(int cts) {
 
 	m_offCourse = cts - m_course;
 	if (m_offCourse > 180) {
@@ -42,7 +42,7 @@ void AutoPilot::calcSteeringConstant(int cts) {
 	}
 }
 
-// int AutoPilot::calcTurningConstant() {
+// int RudderCommand::calcTurningConstant() {
 
 //   int tmpTurnConst = 0;
 //   int tps = 0;
@@ -61,7 +61,7 @@ void AutoPilot::calcSteeringConstant(int cts) {
 
 // }
 
-int AutoPilot::getRudderValue(int cts, int heading) {
+int RudderCommand::getRudderValue(int cts, int heading) {
 
 	// m_course = heading;
 	// double tmpTurnConst;

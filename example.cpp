@@ -1,4 +1,4 @@
-#include "AutoPilot.h"
+#include "RudderCommand.h"
 #include "MockGPSReader.h"
 #include <iostream>
 
@@ -9,7 +9,7 @@ int main() {
 	GPSReader gps;
 
 	int ar[] = { 70, 71, 72, 75, 76, 80, 81, 85, 86, 90 };
-	AutoPilot apa;
+	RudderCommand apa;
 	int foo, bar, i;
 	int rudder;
 	foo = 0;
