@@ -22,16 +22,28 @@ public:
 
 private:
 
+	/* Rudder commands send to the rudder's servo */
+	enum rudderCommands {
+		EXTREME_STARBOARD 	= 97,
+		STARBOARD 			= 98,
+		SMALL_STARBOARD 	= 99,
+		AMIDSHIPS 			= 100,
+		SMALL_PORT 			= 101,
+		PORT 				= 102,
+		EXTREME_PORT 		= 103 
+	};
+
 	/* Calculates the steeringconstant based on CTS and heading */
 	void calcSteeringConstant(int cts);
 
-	/* Calculates the turningconstant based on an older course and a newer course.
-	 */
-	// int calcTurningConstant();
+	/* Sets the degree range from 0->360, to -180->180 */
+	void modifyDegreeRange();
+
+	/* Calculates the turningconstant based on an older course and a newer course */
 	int m_steeringValue;
 	int m_offCourse;
 	int m_course;
-	// int m_turnRate;
+
 };
 
 #endif
