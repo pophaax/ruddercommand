@@ -11,7 +11,7 @@ int RudderCommand::getOffCourse() {
 	return m_offCourse;
 }
 
-int RudderCommand::getSteeringCnst() {
+int RudderCommand::getSteeringValue() {
 	return m_steeringValue;
 }
 

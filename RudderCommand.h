@@ -17,8 +17,8 @@ public:
 	/* Returns a value between 97-103 for the rudder. Takes a CTS value as 
 	 parameter. */
 	int getRudderValue(int cts, int heading);
+	int getSteeringValue();
 	int getOffCourse();
-	int getSteeringCnst();
 
 private:
 
