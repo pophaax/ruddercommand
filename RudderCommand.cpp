@@ -25,9 +25,9 @@ void RudderCommand::modifyDegreeRange() {
 	}
 }
 
-void RudderCommand::calcSteeringConstant(int cts) {
+void RudderCommand::calcSteeringValue(int courseToSteer) {
 
-	m_offCourse = cts - m_course;
+	m_offCourse = courseToSteer - m_course;
 	modifyDegreeRange();
 
 	if (m_offCourse < -17) {
@@ -47,10 +47,10 @@ void RudderCommand::calcSteeringConstant(int cts) {
 	}
 }
 
-int RudderCommand::getRudderValue(int cts, int heading) {
+int RudderCommand::getRudderValue(int courseToSteer, int heading) {
 
 	m_course = heading;
-	calcSteeringConstant(cts);
+	calcSteeringValue(courseToSteer);
 	return m_steeringValue;
 
 }

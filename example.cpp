@@ -9,7 +9,7 @@ int main() {
 	GPSReader gps;
 
 	int ar[] = { 70, 71, 72, 75, 76, 80, 81, 85, 86, 90 };
-	RudderCommand apa;
+	RudderCommand rc;
 	int foo, bar, i;
 	int rudder;
 	foo = 0;
@@ -22,7 +22,7 @@ int main() {
 		cout << "CTS: " << ar[i] << endl;
 
 		i++;
-		rudder = apa.getRudderValue(ar[foo], gps.getHeading());
+		rudder = rc.getRudderValue(ar[foo], gps.getHeading());
 
 		cout << "RudderCMD: " << rudder << endl;
 		cout << "----------------" << endl;

@@ -4,7 +4,7 @@
 class RudderCommand {
 
 	/* RudderCommand handles the calculations for the rudder, the calculations is based
-	 from a CTS value and returns a value between 97-103 to be used with the servo 
+	 from a course to steer value and returns a value between 97-103 to be used with the servo 
 	 module. */
 
 public:
@@ -14,9 +14,9 @@ public:
 	RudderCommand();
 	~RudderCommand(); //destructor
 
-	/* Returns a value between 97-103 for the rudder. Takes a CTS value as 
+	/* Returns a value between 97-103 for the rudder. Takes a courseToSteer value as 
 	 parameter. */
-	int getRudderValue(int cts, int heading);
+	int getRudderValue(int courseToSteer, int heading);
 	int getSteeringValue();
 	int getOffCourse();
 
@@ -33,8 +33,8 @@ private:
 		EXTREME_PORT 		= 103 
 	};
 
-	/* Calculates the steeringconstant based on CTS and heading */
-	void calcSteeringConstant(int cts);
+	/* Calculates the steeringconstant based on course to steer and heading */
+	void calcSteeringValue(int courseToSteer);
 
 	/* Sets the degree range from 0->360, to -180->180 */
 	void modifyDegreeRange();
