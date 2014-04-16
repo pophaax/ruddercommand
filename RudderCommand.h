@@ -25,11 +25,11 @@ private:
 	/* Rudder commands send to the rudder's servo */
 	enum rudderCommands {
 		EXTREME_STARBOARD 	= 97,
-		STARBOARD 			= 98,
+		STARBOARD 		= 98,
 		SMALL_STARBOARD 	= 99,
-		AMIDSHIPS 			= 100,
-		SMALL_PORT 			= 101,
-		PORT 				= 102,
+		AMIDSHIPS 		= 100,
+		SMALL_PORT 		= 101,
+		PORT 			= 102,
 		EXTREME_PORT 		= 103 
 	};
 
