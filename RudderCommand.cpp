@@ -18,10 +18,10 @@ int RudderCommand::getSteeringValue() {
 void RudderCommand::modifyDegreeRange() {
 
 	if (m_offCourse > 180) {
-		m_offCourse - 360;
+		m_offCourse -= 360;
 	}
 	if (m_offCourse < -180) {
-		m_offCourse + 360;
+		m_offCourse += 360;
 	}
 }
 
