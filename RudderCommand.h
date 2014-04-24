@@ -9,29 +9,21 @@ class RudderCommand {
 
 public:
 
-	/* The construtor, the parameter is a value that represent the boatspeed 
-	 and which sensor the RudderCommand use is based on this. */
 	RudderCommand();
-	~RudderCommand(); //destructor
+	~RudderCommand();
 
 	/* Returns a value between 97-103 for the rudder. Takes a courseToSteer value as 
 	 parameter. */
-	int getRudderValue(int courseToSteer, int heading);
-	int getSteeringValue();
-	int getOffCourse();
+	int getCommand(int courseToSteer, int heading);
+
+	// sets the values returned by getCommand()
+	void setCommandValues(int extreme, int medium, int small, int midships);
+
+	// sets the angles used by getCommand() to return appropriate command,
+	// extreme angle uses whats left over
+	void setAngleValues(int medium, int small, int midships);
 
 private:
-
-	/* Rudder commands send to the rudder's servo */
-	enum rudderCommands {
-		EXTREME_STARBOARD 	= 97,
-		STARBOARD 		= 98,
-		SMALL_STARBOARD 	= 99,
-		AMIDSHIPS 		= 100,
-		SMALL_PORT 		= 101,
-		PORT 			= 102,
-		EXTREME_PORT 		= 103 
-	};
 
 	/* Calculates the steeringconstant based on course to steer and heading */
 	void calcSteeringValue(int courseToSteer);
@@ -44,6 +36,14 @@ private:
 	int m_offCourse;
 	int m_course;
 
+	int m_extremeCommand;
+	int m_mediumCommand;
+	int m_smallCommand;
+	int m_midshipsCommand;
+
+	int m_mediumAngle;
+	int m_smallAngle;
+	int m_midshipsAngle;
 };
 
 #endif

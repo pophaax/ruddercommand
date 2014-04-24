@@ -7,12 +7,25 @@ RudderCommand::RudderCommand() {
 RudderCommand::~RudderCommand() {
 }
 
-int RudderCommand::getOffCourse() {
-	return m_offCourse;
+int RudderCommand::getCommand(int courseToSteer, int heading) {
+
+	m_course = heading;
+	calcSteeringValue(courseToSteer);
+	return m_steeringValue;
+
 }
 
-int RudderCommand::getSteeringValue() {
-	return m_steeringValue;
+void RudderCommand::setCommandValues(int extreme, int medium, int small, int midships) {
+	m_extremeCommand = extreme;
+	m_mediumCommand = medium;
+	m_smallCommand = small;
+	m_midshipsCommand = midships;
+}
+
+void RudderCommand::setAngleValues(int medium, int small, int midships) {
+	m_mediumAngle = medium;
+	m_smallAngle = small;
+	m_midshipsAngle = midships;
 }
 
 void RudderCommand::modifyDegreeRange() {
@@ -30,27 +43,19 @@ void RudderCommand::calcSteeringValue(int courseToSteer) {
 	m_offCourse = courseToSteer - m_course;
 	modifyDegreeRange();
 
-	if (m_offCourse < -17) {
-		m_steeringValue = EXTREME_STARBOARD;
-	} else if (m_offCourse < -11) {
-		m_steeringValue = STARBOARD;
-	} else if (m_offCourse < -5) {
-		m_steeringValue = SMALL_STARBOARD;
-	} else if (m_offCourse < 6) {
-		m_steeringValue = AMIDSHIPS;
-	} else if (m_offCourse < 12) {
-		m_steeringValue = SMALL_PORT;
-	} else if (m_offCourse < 17) {
-		m_steeringValue = PORT;
+	if (m_offCourse < -m_mediumAngle) {
+		m_steeringValue = m_midshipsCommand - (m_extremeCommand - m_midshipsCommand);
+	} else if (m_offCourse < -m_smallAngle) {
+		m_steeringValue = m_midshipsCommand - (m_mediumCommand - m_midshipsCommand);
+	} else if (m_offCourse < -m_midshipsAngle) {
+		m_steeringValue = m_midshipsCommand - (m_smallCommand - m_midshipsCommand);
+	} else if (m_offCourse > m_mediumAngle) {
+		m_steeringValue = m_extremeCommand;
+	} else if (m_offCourse > m_smallAngle) {
+		m_steeringValue = m_mediumCommand;
+	} else if (m_offCourse > m_midshipsAngle) {
+		m_steeringValue = m_smallCommand;
 	} else {
-		m_steeringValue = EXTREME_PORT;
+		m_steeringValue = m_midshipsCommand;
 	}
-}
-
-int RudderCommand::getRudderValue(int courseToSteer, int heading) {
-
-	m_course = heading;
-	calcSteeringValue(courseToSteer);
-	return m_steeringValue;
-
 }

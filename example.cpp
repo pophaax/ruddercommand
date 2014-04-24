@@ -1,5 +1,4 @@
 #include "RudderCommand.h"
-#include "MockGPSReader.h"
 #include <iostream>
 
 using namespace std;
@@ -25,6 +24,8 @@ int main() {
 
 	int ar[] = { 70, 71, 72, 75, 76, 80, 81, 85, 86, 90 };
 	RudderCommand rc;
+	rc.setCommandValues(103, 102, 101, 100);
+	rc.setAngleValues(18, 12, 6);
 	int foo, bar, i;
 	int rudder;
 	foo = 0;
@@ -37,7 +38,7 @@ int main() {
 		cout << "CTS: " << ar[i] << endl;
 
 		i++;
-		rudder = rc.getRudderValue(ar[foo], gps.getHeading());
+		rudder = rc.getCommand(ar[foo], gps.getHeading());
 
 		cout << "RudderCMD: " << rudder << endl;
 		cout << "----------------" << endl;
