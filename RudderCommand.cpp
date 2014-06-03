@@ -28,6 +28,10 @@ void RudderCommand::setAngleValues(int medium, int small, int midships) {
 	m_midshipsAngle = midships;
 }
 
+int RudderCommand::getMidShipsCommand() {
+	return 	m_midshipsCommand;
+}
+
 void RudderCommand::modifyDegreeRange() {
 
 	if (m_offCourse > 180) {

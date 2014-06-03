@@ -23,6 +23,9 @@ public:
 	// extreme angle uses whats left over
 	void setAngleValues(int medium, int small, int midships);
 
+	//returns m_midshipsCommand
+	int getMidShipsCommand();
+
 private:
 
 	/* Calculates the steeringconstant based on course to steer and heading */
