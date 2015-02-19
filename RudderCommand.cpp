@@ -16,9 +16,9 @@ int RudderCommand::getCommand(int courseToSteer, int heading) {
 }
 
 void RudderCommand::setCommandValues(int starboardExtreme, int starboardMedium, int starboardSmall, int midships) {
-	m_extremeCommand = extreme;
-	m_mediumCommand = medium;
-	m_smallCommand = small;
+	m_extremeCommand = starboardExtreme;
+	m_mediumCommand = starboardMedium;
+	m_smallCommand = starboardSmall;
 	m_midshipsCommand = midships;
 }
 
