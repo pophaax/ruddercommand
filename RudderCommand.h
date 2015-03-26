@@ -1,6 +1,8 @@
 #ifndef __RUDDERCOMMAND_H__
 #define __RUDDERCOMMAND_H__
 
+#include <math.h>
+
 class RudderCommand {
 
 	/* RudderCommand handles the calculations for the rudder, the calculations is based
