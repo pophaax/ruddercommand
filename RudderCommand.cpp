@@ -43,23 +43,36 @@ void RudderCommand::modifyDegreeRange() {
 }
 
 void RudderCommand::calcSteeringValue(int courseToSteer) {
-
 	m_offCourse = courseToSteer - m_course;
 	modifyDegreeRange();
-
-	if (m_offCourse < -m_mediumAngle) {
-		m_steeringValue = m_midshipsCommand - (m_extremeCommand - m_midshipsCommand);
-	} else if (m_offCourse < -m_smallAngle) {
-		m_steeringValue = m_midshipsCommand - (m_mediumCommand - m_midshipsCommand);
-	} else if (m_offCourse < -m_midshipsAngle) {
-		m_steeringValue = m_midshipsCommand - (m_smallCommand - m_midshipsCommand);
-	} else if (m_offCourse > m_mediumAngle) {
-		m_steeringValue = m_extremeCommand;
-	} else if (m_offCourse > m_smallAngle) {
-		m_steeringValue = m_mediumCommand;
-	} else if (m_offCourse > m_midshipsAngle) {
-		m_steeringValue = m_smallCommand;
-	} else {
-		m_steeringValue = m_midshipsCommand;
+	int deltaCommand = m_extremeCommand - m_midshipsCommand;
+	if ( cos(m_offCourse) > 0) {
+		m_steeringValue = m_midshipsCommand + deltaCommand * sin(m_offCourse);
 	}
+	else {
+		if (sin(m_offCourse) > 0) {
+			m_steeringValue = m_midshipsCommand + deltaCommand;
+		}
+		else {
+			m_steeringValue = m_midshipsCommand - deltaCommand;
+		}
+	}
+
+
+//
+//	if (m_offCourse < -m_mediumAngle) {
+//		m_steeringValue = m_midshipsCommand - (m_extremeCommand - m_midshipsCommand);
+//	} else if (m_offCourse < -m_smallAngle) {
+//		m_steeringValue = m_midshipsCommand - (m_mediumCommand - m_midshipsCommand);
+//	} else if (m_offCourse < -m_midshipsAngle) {
+//		m_steeringValue = m_midshipsCommand - (m_smallCommand - m_midshipsCommand);
+//	} else if (m_offCourse > m_mediumAngle) {
+//		m_steeringValue = m_extremeCommand;
+//	} else if (m_offCourse > m_smallAngle) {
+//		m_steeringValue = m_mediumCommand;
+//	} else if (m_offCourse > m_midshipsAngle) {
+//		m_steeringValue = m_smallCommand;
+//	} else {
+//		m_steeringValue = m_midshipsCommand;
+//	}
 }
