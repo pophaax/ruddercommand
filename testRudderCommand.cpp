@@ -9,6 +9,8 @@ TEST_CASE("RudderCommandTest")
 	{
 		/* Constant heading position */
 		const int gps_heading = 76;
+		
+		/* Output to servo */
 		const int command_min = 97;
 		const int command_max = 103;
 
@@ -23,10 +25,8 @@ TEST_CASE("RudderCommandTest")
 		for(int i = 0; i <= 360; i++) {
 			rudder = rc.getCommand(i, gps_heading);
 
-			/* Command min = 97 */
-			REQUIRE(rudder >= 97);
-			/* Command max = 103 */
-			REQUIRE(rudder <= 103);
+			REQUIRE(rudder >= command_min);
+			REQUIRE(rudder <= command_max);
 		}
 	}
 }
