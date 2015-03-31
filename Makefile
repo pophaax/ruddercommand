@@ -24,18 +24,8 @@ $(FILE) : $(SOURCES) $(HEADERS)
 example : $(SOURCES) $(HEADERS) example.cpp
 	$(CC) $(SOURCES) example.cpp $(FLAGS) $(LIBS) -o example
 
-
-# Make for test
-CC = g++
-
-SOURCES = RudderCommand.cpp
-SOURCE_TEST = testRudderCommand.cpp
-HEADERS = RudderCommand.h 
-HEADER_CATCH = catch.hpp
-
-test : $(SOURCES) $(HEADERS) $(HEADER_CATCH) $(SOURCE_TEST)
-	$(CC) $(SOURCES) $(SOURCE_TEST) -o test
-
+test : $(SOURCES) $(HEADERS) catch.hpp testRudderCommand.cpp
+	$(CC) $(SOURCES) testRudderCommand.cpp $(LIBS) -o test
 
 clean :
 	rm -f test
