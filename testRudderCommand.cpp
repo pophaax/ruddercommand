@@ -29,4 +29,26 @@ TEST_CASE("RudderCommandTest")
 			REQUIRE(rudder <= command_max);
 		}
 	}
+
+	SECTION("Test courseToSteer to be 10 different values, check if resulting command is correct")
+	{
+		/* Constant heading position */
+		const int gps_heading = 76;
+		/* CTS from example.cpp */
+		const int CTS[] = { 70, 71, 72, 75, 76, 80, 81, 85, 86, 90 };
+		/* Resulting commands taken from running example.cpp*/
+		const int result_command[] = { 100,102,103,97,100,97,97,103,97,102 }; 
+		const int noOfCTS = 10;
+
+		RudderCommand rc;
+		/* Magic values from example.cpp */
+		rc.setCommandValues(103, 102, 101, 100); 
+		rc.setAngleValues(18, 12, 6);
+		
+		int rudder;
+		for(int i = 0; i < noOfCTS; i++) {
+			rudder = rc.getCommand(CTS[i], gps_heading);
+			REQUIRE(rudder == result_command[i]);
+		}
+	}
 }
