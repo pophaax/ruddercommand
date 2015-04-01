@@ -24,7 +24,7 @@ $(FILE) : $(SOURCES) $(HEADERS)
 example : $(SOURCES) $(HEADERS) example.cpp
 	$(CC) $(SOURCES) example.cpp $(FLAGS) $(LIBS) -o example
 
-test : $(SOURCES) $(HEADERS) catch.hpp testRudderCommand.cpp
+test : $(SOURCES) $(HEADERS) ../catch.hpp testRudderCommand.cpp
 	$(CC) $(SOURCES) testRudderCommand.cpp $(LIBS) -o test
 
 clean :
