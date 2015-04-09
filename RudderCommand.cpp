@@ -1,4 +1,6 @@
 #include "RudderCommand.h"
+#include <math.h>
+
 
 RudderCommand::RudderCommand() {
 	m_steeringValue = 0;
@@ -12,20 +14,11 @@ int RudderCommand::getCommand(int courseToSteer, int heading) {
 	m_course = heading;
 	calcSteeringValue(courseToSteer);
 	return m_steeringValue;
-
 }
 
-void RudderCommand::setCommandValues(int starboardExtreme, int starboardMedium, int starboardSmall, int midships) {
+void RudderCommand::setCommandValues(int starboardExtreme, int midships) {
 	m_extremeCommand = starboardExtreme;
-	m_mediumCommand = starboardMedium;
-	m_smallCommand = starboardSmall;
 	m_midshipsCommand = midships;
-}
-
-void RudderCommand::setAngleValues(int medium, int small, int midships) {
-	m_mediumAngle = medium;
-	m_smallAngle = small;
-	m_midshipsAngle = midships;
 }
 
 int RudderCommand::getMidShipsCommand() {
@@ -57,22 +50,4 @@ void RudderCommand::calcSteeringValue(int courseToSteer) {
 			m_steeringValue = m_midshipsCommand - deltaCommand;
 		}
 	}
-
-
-//
-//	if (m_offCourse < -m_mediumAngle) {
-//		m_steeringValue = m_midshipsCommand - (m_extremeCommand - m_midshipsCommand);
-//	} else if (m_offCourse < -m_smallAngle) {
-//		m_steeringValue = m_midshipsCommand - (m_mediumCommand - m_midshipsCommand);
-//	} else if (m_offCourse < -m_midshipsAngle) {
-//		m_steeringValue = m_midshipsCommand - (m_smallCommand - m_midshipsCommand);
-//	} else if (m_offCourse > m_mediumAngle) {
-//		m_steeringValue = m_extremeCommand;
-//	} else if (m_offCourse > m_smallAngle) {
-//		m_steeringValue = m_mediumCommand;
-//	} else if (m_offCourse > m_midshipsAngle) {
-//		m_steeringValue = m_smallCommand;
-//	} else {
-//		m_steeringValue = m_midshipsCommand;
-//	}
 }

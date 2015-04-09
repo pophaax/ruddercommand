@@ -1,7 +1,6 @@
 #ifndef __RUDDERCOMMAND_H__
 #define __RUDDERCOMMAND_H__
 
-#include <math.h>
 
 class RudderCommand {
 
@@ -19,11 +18,7 @@ public:
 	int getCommand(int courseToSteer, int heading);
 
 	// sets the values returned by getCommand()
-	void setCommandValues(int starboardExtreme, int starboardMedium, int starboardSmall, int midships);
-
-	// sets the angles used by getCommand() to return appropriate command,
-	// extreme angle uses whats left over
-	void setAngleValues(int medium, int small, int midships);
+	void setCommandValues(int starboardExtreme, int midships);
 
 	//returns m_midshipsCommand
 	int getMidShipsCommand();
@@ -42,13 +37,7 @@ private:
 	int m_course;
 
 	int m_extremeCommand;
-	int m_mediumCommand;
-	int m_smallCommand;
 	int m_midshipsCommand;
-
-	int m_mediumAngle;
-	int m_smallAngle;
-	int m_midshipsAngle;
 };
 
 #endif

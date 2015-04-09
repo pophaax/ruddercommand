@@ -16,8 +16,7 @@ TEST_CASE("RudderCommandTest")
 
 		RudderCommand rc;
 		/* Magic values from example.cpp */
-		rc.setCommandValues(103, 102, 101, 100); 
-		rc.setAngleValues(18, 12, 6);
+		rc.setCommandValues(103, 100); 
 		
 		int rudder;
 
@@ -42,8 +41,7 @@ TEST_CASE("RudderCommandTest")
 
 		RudderCommand rc;
 		/* Magic values from example.cpp */
-		rc.setCommandValues(103, 102, 101, 100); 
-		rc.setAngleValues(18, 12, 6);
+		rc.setCommandValues(103, 100);
 		
 		int rudder;
 		for(int i = 0; i < noOfCTS; i++) {

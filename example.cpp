@@ -24,8 +24,7 @@ int main() {
 
 	int ar[] = { 70, 71, 72, 75, 76, 80, 81, 85, 86, 90 };
 	RudderCommand rc;
-	rc.setCommandValues(103, 102, 101, 100);
-	rc.setAngleValues(18, 12, 6);
+	rc.setCommandValues(103, 100);
 	int foo, bar, i;
 	int rudder;
 	foo = 0;
