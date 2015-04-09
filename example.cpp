@@ -1,8 +1,6 @@
 #include "RudderCommand.h"
 #include <iostream>
 
-using namespace std;
-
 class GPSReader {
 //mock gpsreader, used by example.cpp
 public:
@@ -31,16 +29,16 @@ int main() {
 	bar = 10;
 	i = 0;
 
-	cout << "Heading: " << gps.getHeading() << endl;
+	std::cout << "Heading: " << gps.getHeading() << std::endl;
 	do {
 
-		cout << "CTS: " << ar[i] << endl;
+		std::cout << "CTS: " << ar[i] << std::endl;
 
 		i++;
 		rudder = rc.getCommand(ar[foo], gps.getHeading());
 
-		cout << "RudderCMD: " << rudder << endl;
-		cout << "----------------" << endl;
+		std::cout << "RudderCMD: " << rudder << std::endl;
+		std::cout << "----------------" << std::endl;
 
 		foo++;
 
