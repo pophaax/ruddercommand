@@ -11,7 +11,7 @@ TEST_CASE("RudderCommandTest")
 		const int gps_heading = 76;
 		
 		/* Output to servo */
-		const int command_min = 97;
+		const int command_min = 103 - 97;
 		const int command_max = 103;
 
 		RudderCommand rc;
@@ -27,6 +27,27 @@ TEST_CASE("RudderCommandTest")
 			REQUIRE(rudder >= command_min);
 			REQUIRE(rudder <= command_max);
 		}
+	}SECTION("Test courseToSteer with more realistic values")
+	{
+		/* Constant heading position */
+		const int gps_heading = 76;
+
+		/* Output to servo */
+		const int command_min = 1900;
+		const int command_max = 6700;
+
+		RudderCommand rc;
+		/* Magic values from example.cpp */
+		rc.setCommandValues(6700,4300);
+
+		int rudder;
+
+		/* Loops through every possible degree value based on a compass 0 - 360 */
+		for(int i = 0; i <= 360; i++) {
+			rudder = rc.getCommand(i, gps_heading);
+			REQUIRE(rudder >= command_min);
+			REQUIRE(rudder <= command_max);
+		}
 	}
 
 	SECTION("Test courseToSteer to be 10 different values, check if resulting command is correct")
@@ -36,12 +57,12 @@ TEST_CASE("RudderCommandTest")
 		/* CTS from example.cpp */
 		const int CTS[] = { 70, 71, 72, 75, 76, 80, 81, 85, 86, 90 };
 		/* Resulting commands taken from running example.cpp*/
-		const int result_command[] = { 100,102,103,97,100,97,97,103,97,102 }; 
+		const int result_command[] = { 89, 91, 93, 98, 100, 106, 108, 115, 117, 124 };
 		const int noOfCTS = 10;
 
 		RudderCommand rc;
 		/* Magic values from example.cpp */
-		rc.setCommandValues(103, 100);
+		rc.setCommandValues(200, 100);
 		
 		int rudder;
 		for(int i = 0; i < noOfCTS; i++) {

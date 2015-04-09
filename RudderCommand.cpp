@@ -39,11 +39,11 @@ void RudderCommand::calcSteeringValue(int courseToSteer) {
 	m_offCourse = courseToSteer - m_course;
 	modifyDegreeRange();
 	int deltaCommand = m_extremeCommand - m_midshipsCommand;
-	if ( cos(m_offCourse) > 0) {
-		m_steeringValue = m_midshipsCommand + deltaCommand * sin(m_offCourse);
+	if ( cos(m_offCourse * (M_PI / 180)) > 0) {
+		m_steeringValue = m_midshipsCommand + deltaCommand * sin(m_offCourse * (M_PI / 180));
 	}
 	else {
-		if (sin(m_offCourse) > 0) {
+		if (sin(m_offCourse * (M_PI / 180)) > 0) {
 			m_steeringValue = m_midshipsCommand + deltaCommand;
 		}
 		else {
