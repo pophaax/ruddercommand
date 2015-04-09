@@ -39,11 +39,12 @@ clean :
 	rm -f *.gcda
 	rm -f *.gcno
 
+
 metalog :
 	make metatest
 	./metatest
 	gcov -r RudderCommand.cpp
-	grep -wE "(#####)" RudderCommand.cpp.gcov > metatestlog.txt
-	rm -f *.gcov
-	make clean
+	grep -wE "(#####)" RudderCommand.cpp.gcov >> metatestlog.txt	
 	sed -i '1s/^/Codelines below not tested by test*.cpp\n/' metatestlog.txt
+	gcov -r RudderCommand.cpp >> metatestlog.txt
+	make clean
