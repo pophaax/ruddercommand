@@ -32,7 +32,7 @@ metatest : $(SOURCES) $(HEADERS) ../catch.hpp testRudderCommand.cpp
 
 
 clean :
-	rm -f $(FILES)
+	rm -f $(FILE)
 	rm -f example
 	rm -f test
 	rm -f metatest
