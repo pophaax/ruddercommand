@@ -1,24 +1,9 @@
 #include "RudderCommand.h"
 #include <iostream>
 
-class GPSReader {
-//mock gpsreader, used by example.cpp
-public:
-	GPSReader() {
-	};
-	
-	int getSpeed() {
-		return 2;
-	};
-
-	int getHeading() {
-	return 76;
-	};
-};
-
 int main() {
 
-	GPSReader gps;
+	MockGPSReader gps;
 
 	int ar[] = { 70, 71, 72, 75, 76, 80, 81, 85, 86, 90 };
 	RudderCommand rc;
