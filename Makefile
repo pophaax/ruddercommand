@@ -24,17 +24,13 @@ $(FILE) : $(SOURCES) $(HEADERS)
 example : $(SOURCES) $(HEADERS) example.cpp
 	$(CC) $(SOURCES) example.cpp $(FLAGS) $(LIBS) -o example
 
-test : $(SOURCES) $(HEADERS) $$SAILINGROBOTS_HOME/catch.hpp testRudderCommand.cpp
-	$(CC) $(SOURCES) testRudderCommand.cpp $(LIBS) -o test
-
-metatest : $(SOURCES) $(HEADERS) $$SAILINGROBOTS_HOME/catch.hpp testRudderCommand.cpp
-	$(CC) $(SOURCES) testRudderCommand.cpp -fprofile-arcs -ftest-coverage $(LIBS) -o metatest 
+metatest : $(SOURCES) $(HEADERS) $(SAILINGROBOTS_HOME)/tests/catch.hpp $(SAILINGROBOTS_HOME)/tests/testsuite/testRudderCommand.cpp
+	$(CC) $(SOURCES) $(SAILINGROBOTS_HOME)/tests/testsuite/testRudderCommand.cpp -fprofile-arcs -ftest-coverage $(LIBS) -o metatest 
 
 
 clean :
 	rm -f $(FILE)
 	rm -f example
-	rm -f test
 	rm -f metatest
 	rm -f *.gcda
 	rm -f *.gcno
