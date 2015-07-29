@@ -9,11 +9,10 @@ RudderCommand::RudderCommand() {
 RudderCommand::~RudderCommand() {
 }
 
-int RudderCommand::getCommand(int courseToSteer, int heading) {
-
-	m_course = heading;
-	calcSteeringValue(courseToSteer);
-	return m_steeringValue;
+int RudderCommand::getCommand(double command) {
+	//-1=portextreme, 0=midships, 1=starboardextreme
+	int delta = m_extremeCommand - m_midshipsCommand;
+	return m_midshipsCommand + delta * command;
 }
 
 void RudderCommand::setCommandValues(int starboardExtreme, int midships) {
@@ -22,32 +21,5 @@ void RudderCommand::setCommandValues(int starboardExtreme, int midships) {
 }
 
 int RudderCommand::getMidShipsCommand() {
-	return 	m_midshipsCommand;
-}
-
-void RudderCommand::modifyDegreeRange() {
-
-	if (m_offCourse > 180) {
-		m_offCourse -= 360;
-	}
-	if (m_offCourse < -180) {
-		m_offCourse += 360;
-	}
-}
-
-void RudderCommand::calcSteeringValue(int courseToSteer) {
-	m_offCourse = courseToSteer - m_course;
-	modifyDegreeRange();
-	int deltaCommand = m_extremeCommand - m_midshipsCommand;
-	if ( cos(m_offCourse * (M_PI / 180)) > 0) {
-		m_steeringValue = m_midshipsCommand + deltaCommand * sin(m_offCourse * (M_PI / 180));
-	}
-	else {
-		if (sin(m_offCourse * (M_PI / 180)) > 0) {
-			m_steeringValue = m_midshipsCommand + deltaCommand;
-		}
-		else {
-			m_steeringValue = m_midshipsCommand - deltaCommand;
-		}
-	}
+	return m_midshipsCommand;
 }
