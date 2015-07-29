@@ -1,5 +1,4 @@
 #include "RudderCommand.h"
-#include <math.h>
 
 
 RudderCommand::RudderCommand() {
@@ -11,6 +10,11 @@ RudderCommand::~RudderCommand() {
 
 int RudderCommand::getCommand(double command) {
 	//-1=portextreme, 0=midships, 1=starboardextreme
+	if (command < -1)
+		command = -1;
+	if (command > 1)
+		command = 1;
+
 	int delta = m_extremeCommand - m_midshipsCommand;
 	return m_midshipsCommand + delta * command;
 }
